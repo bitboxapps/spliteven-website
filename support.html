@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - SplitEven</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Core Variables & Resets */
+        :root {
+            --primary: #6366F1;
+            --primary-light: #818CF8;
+            --primary-dark: #4F46E5;
+            --surface: #FFFFFF;
+            --background: #F8FAFC;
+            --on-surface: #1E293B;
+            --on-surface-variant: #64748B;
+            --outline: #E2E8F0;
+            --gradient-start: #6366F1;
+            --gradient-end: #8B5CF6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--background);
+            color: var(--on-surface);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--outline);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo {
+           display: flex;
+           align-items: center;
+           gap: 8px; /* Nice gap between image and text */
+           font-size: 1.5rem;
+           font-weight: 800;
+           color: var(--primary);
+           text-decoration: none;
+        }
+
+        /* We removed the purple gradient background from the container */
+        .logo-icon {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+        }
+
+      /* The new image sizing rule (applied everywhere now) */
+       .logo-img {
+          width: 40px;  /* Slightly larger to match your original 40px box */
+          height: 40px; 
+          object-fit: contain;
+          display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--on-surface-variant);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--on-surface);
+        }
+
+        /* Hero Section */
+        .page-hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .page-hero p {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Page Content */
+        .page-content {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .content-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Support Grid */
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .support-card {
+            padding: 2rem;
+            background: var(--background);
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .support-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.1);
+        }
+
+        .support-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .support-card h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--on-surface);
+        }
+
+        .support-card p {
+            color: var(--on-surface-variant);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .support-card a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .support-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Form */
+        .contact-section h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--on-surface);
+            margin-bottom: 1rem;
+        }
+
+        .contact-section p {
+            color: var(--on-surface-variant);
+            margin-bottom: 2rem;
+        }
+
+        .contact-form {
+            background: var(--background);
+            padding: 2rem;
+            border-radius: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--on-surface);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--outline);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--on-surface);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            max-width: 300px;
+        }
+
+        .footer-links h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            /* Add mobile menu logic if needed */
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <img src="assets/spliteven_logo.png" alt="SplitEven Logo" class="logo-img">
+                </div>
+                SplitEven
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="faq.html">Help Center</a></li>
+                <li><a href="support.html" class="active">Support</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <h1>Support Center</h1>
+        <p>We're here to help you get the most out of SplitEven</p>
+    </section>
+
+    <section class="page-content">
+        <div class="content-container">
+            <div class="support-grid">
+                <div class="support-card">
+                    <div class="support-icon">❓</div>
+                    <h3>Help Center</h3>
+                    <p>Find quick answers to common questions about using SplitEven</p>
+                    <a href="faq.html">View Help Center →</a>
+                </div>
+                <div class="support-card">
+                    <div class="support-icon">📧</div>
+                    <h3>Email Us</h3>
+                    <p>Send us an email and we'll respond within 24 hours</p>
+                    <a href="mailto:bitbox.apps.contact@gmail.com?subject=[General] SplitEven Support">Email Support</a>
+                </div>
+                <div class="support-card">
+                    <div class="support-icon">🐛</div>
+                    <h3>Report a Bug</h3>
+                    <p>Found something not working right? Let us know so we can fix it</p>
+                    <a href="mailto:bitbox.apps.contact@gmail.com?subject=[Bug Report] SplitEven App">Report Issue</a>
+                </div>
+                <div class="support-card">
+                    <div class="support-icon">💡</div>
+                    <h3>Feature Request</h3>
+                    <p>Have an idea to make SplitEven better? We'd love to hear it</p>
+                    <a href="mailto:bitbox.apps.contact@gmail.com?subject=[Feature Request] SplitEven App">Share
+                        Feedback</a>
+                </div>
+            </div>
+
+            <div class="contact-section">
+                <h2>Contact Us</h2>
+                <p>Can't find what you're looking for? Send us a message and we'll get back to you as soon as possible.
+                </p>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="topic">Topic</label>
+                        <select id="topic" name="topic" required>
+                            <option value="">Select a topic...</option>
+                            <option value="general">General Question</option>
+                            <option value="bug">Report a Bug</option>
+                            <option value="feature">Feature Request</option>
+                            <option value="account">Account Issue</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required
+                            placeholder="Tell us how we can help..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>SplitEven</h3>
+                <p>The smartest way to split bills with friends. Fair, fast, and hassle-free.</p>
+            </div>
+            <div class="footer-links">
+                <h4>App</h4>
+                <ul>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.bitbox.spliteven">Download
+                            Android</a></li>
+                    <li><a href="#">iOS Coming Soon</a></li>
+                    <li><a href="faq.html">Help Center</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="support.html">Contact Support</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 SplitEven. All rights reserved. Made with ❤️ for fair bill splitting.</p>
+        </div>
+    </footer>
+
+    <script>
+        const form = document.getElementById("contactForm");
+
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            const status = document.querySelector(".btn-submit");
+            const data = new FormData(event.target);
+
+            // Visual feedback for the user
+            status.innerText = "Sending...";
+            status.disabled = true;
+
+            try {
+                const response = await fetch("https://formspree.io/f/mqedbgro", {
+                    method: "POST",
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    alert('Thank you! Your message has been sent to our team.');
+                    event.target.reset();
+                } else {
+                    const errorData = await response.json();
+                    alert('Oops! ' + (errorData.errors ? errorData.errors[0].message : 'There was a problem sending your message.'));
+                }
+            } catch (error) {
+                alert('Error: Could not connect to the server. Please check your internet and try again.');
+            } finally {
+                // Restore button
+                status.innerText = "Send Message";
+                status.disabled = false;
+            }
+        }
+
+        form.addEventListener("submit", handleFormSubmit);
+    </script>
+</body>
+
+</html>

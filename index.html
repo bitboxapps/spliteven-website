@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SplitEven - Split Bills Effortlessly</title>
+    <meta name="description" content="SplitEven makes splitting bills with friends easy. Scan any receipt and split it fairly in seconds.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366F1;
+            --primary-light: #818CF8;
+            --primary-dark: #4F46E5;
+            --primary-container: #E0E7FF;
+            --secondary: #8B5CF6;
+            --accent-cyan: #06B6D4;
+            --accent-green: #10B981;
+            --accent-orange: #F59E0B;
+            --accent-pink: #EC4899;
+            --surface: #FFFFFF;
+            --background: #F8FAFC;
+            --on-surface: #1E293B;
+            --on-surface-variant: #64748B;
+            --outline: #E2E8F0;
+            --gradient-start: #6366F1;
+            --gradient-end: #8B5CF6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--background);
+            color: var(--on-surface);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--outline);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+           display: flex;
+           align-items: center;
+           gap: 8px; /* Nice gap between image and text */
+           font-size: 1.5rem;
+           font-weight: 800;
+           color: var(--primary);
+           text-decoration: none;
+        }
+
+        /* We removed the purple gradient background from the container */
+        .logo-icon {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+        }
+
+      /* The new image sizing rule (applied everywhere now) */
+       .logo-img {
+          width: 40px;  /* Slightly larger to match your original 40px box */
+          height: 40px; 
+          object-fit: contain;
+          display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--on-surface-variant);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--on-surface);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #6366f1 100%);
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-content h1 span {
+            background: linear-gradient(135deg, #FCD34D, #F59E0B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .hero-phones {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .phone-mockup {
+            width: 280px;
+            height: auto;
+            border-radius: 36px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: transform 0.5s ease;
+        }
+
+        .phone-mockup:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+        .phone-mockup.secondary {
+            position: absolute;
+            right: -60px;
+            top: 60px;
+            width: 240px;
+            transform: perspective(1000px) rotateY(-10deg);
+            opacity: 0.9;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--on-surface);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.125rem;
+            color: var(--on-surface-variant);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            background: var(--background);
+            border-radius: 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.15);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--on-surface);
+        }
+
+        .feature-card p {
+            color: var(--on-surface-variant);
+            font-size: 0.95rem;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 6rem 2rem;
+            background: var(--background);
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: -50%;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            z-index: 0;
+        }
+
+        .step:last-child::after {
+            display: none;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: white;
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .step h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--on-surface);
+        }
+
+        .step p {
+            color: var(--on-surface-variant);
+            font-size: 0.9rem;
+        }
+
+        /* Screenshots Showcase */
+        .showcase {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .showcase .section-header h2,
+        .showcase .section-header p {
+            color: white;
+        }
+
+        .showcase .section-header p {
+            opacity: 0.9;
+        }
+
+        .screenshots-scroll {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .screenshot-item {
+            width: 220px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot-item:hover {
+            transform: scale(1.05);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 2rem;
+            background: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--on-surface);
+        }
+
+        .cta p {
+            font-size: 1.125rem;
+            color: var(--on-surface-variant);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .store-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .store-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1.5rem;
+            background: var(--on-surface);
+            color: white;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .store-btn:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .store-btn svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .store-btn-text {
+            text-align: left;
+        }
+
+        .store-btn-text small {
+            font-size: 0.7rem;
+            opacity: 0.8;
+            display: block;
+        }
+
+        .store-btn-text span {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--on-surface);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            max-width: 300px;
+        }
+
+        .footer-links h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+        }
+
+        /* Page Content Styles (for FAQ, Privacy, etc.) */
+        .page-hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .page-hero p {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .page-content {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .content-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-container h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--on-surface);
+            margin: 2.5rem 0 1rem;
+        }
+
+        .content-container h2:first-child {
+            margin-top: 0;
+        }
+
+        .content-container h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--on-surface);
+            margin: 2rem 0 0.75rem;
+        }
+
+        .content-container p {
+            color: var(--on-surface-variant);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .content-container ul {
+            color: var(--on-surface-variant);
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        .content-container li {
+            margin-bottom: 0.5rem;
+            line-height: 1.7;
+        }
+
+        /* FAQ Accordion */
+        .faq-item {
+            border: 1px solid var(--outline);
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.25rem 1.5rem;
+            background: var(--background);
+            border: none;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--on-surface);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: var(--primary-container);
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 1.25rem 1.5rem;
+            color: var(--on-surface-variant);
+            line-height: 1.7;
+        }
+
+        /* Support Page */
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .support-card {
+            padding: 2rem;
+            background: var(--background);
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .support-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.1);
+        }
+
+        .support-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .support-card h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--on-surface);
+        }
+
+        .support-card p {
+            color: var(--on-surface-variant);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .support-card a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .support-card a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-form {
+            background: var(--background);
+            padding: 2rem;
+            border-radius: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--on-surface);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--outline);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Hide all pages except home by default */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin: 0 auto 2rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .step::after {
+                display: none;
+            }
+
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                gap: 0;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 1rem;
+                border-bottom: 1px solid var(--outline);
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .phone-mockup {
+                width: 220px;
+            }
+
+            .phone-mockup.secondary {
+                display: none;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-container {
+                grid-template-columns: 1fr;
+            }
+
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-brand p {
+                max-width: none;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showPage('home')">
+                <div class="logo-icon">
+                    <img src="assets/spliteven_logo.png" alt="SplitEven Logo" class="logo-img">
+                </div>
+                SplitEven
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="faq.html">Help Center</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>Split bills with friends <span>effortlessly</span></h1>
+                    <p>No more awkward math or chasing IOUs. Scan any receipt and split it fairly in seconds with our AI-powered app.</p>
+                    <div class="hero-buttons">
+                         <a href="https://play.google.com/store/apps/details?id=com.bitbox.spliteven" class="btn btn-secondary">
+                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+                            Download for Android
+                        </a>
+                        <a href="#" class="btn btn-primary">
+                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+                            Available Soon on iOS 
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-phones">
+                    <img src="images/screenshot-1.jpg" alt="SplitEven App Screenshot" class="phone-mockup">
+                    <img src="images/screenshot-2.jpg" alt="SplitEven App Screenshot" class="phone-mockup secondary">
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2>Why Choose SplitEven?</h2>
+                    <p>The smartest way to split bills with friends and family. Fast, fair, and hassle-free.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📷</div>
+                        <h3>AI-Powered Scanning</h3>
+                        <p>Just snap a photo of your receipt. Our AI instantly extracts every item, tax, and tip automatically.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👥</div>
+                        <h3>Easy Assignment</h3>
+                        <p>Tap to assign items to friends. Split shared items equally or let each person pay for what they had.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Fair Calculations</h3>
+                        <p>Tax and tip are split proportionally based on what each person ordered. No more overpaying!</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Lightning Fast</h3>
+                        <p>Split any bill in under 30 seconds. No manual entry required – we do all the math for you.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📤</div>
+                        <h3>Share &amp; Settle Easily</h3>
+                        <p>Instantly share itemized splits with friends so everyone knows exactly what to pay.</p>
+                    </div>
+                    <div class="feature-card">
+                         <div class="feature-icon">🧾</div>
+                        <h3>Receipt History</h3>
+                        <p>Your receipts are securely saved. View your past splits anytime in the app.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="how-it-works">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2>How It Works</h2>
+                    <p>Split any bill in 4 simple steps</p>
+                </div>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Scan Receipt</h3>
+                        <p>Take a photo or upload an image of your receipt</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Add Friends</h3>
+                        <p>Select who's splitting the bill with you</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Assign Items</h3>
+                        <p>Tap to assign items to each person</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>Share Split</h3>
+                        <p>Send each person their share amount</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screenshots Showcase -->
+        <section class="showcase">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2>See It In Action</h2>
+                    <p>Beautiful, intuitive design that makes bill splitting a breeze</p>
+                </div>
+                <div class="screenshots-scroll">
+                    <div class="screenshot-item">
+                        <img src="images/screenshot-1.jpg" alt="Scan receipt screen">
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/screenshot-2.jpg" alt="Split with friends">
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/screenshot-3.jpg" alt="Assign items">
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/screenshot-4.jpg" alt="Summary view">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <h2>Ready to Split Smarter?</h2>
+            <p>Download SplitEven now and never do awkward bill math again.</p>
+            <div class="store-buttons">
+                 <a href="https://play.google.com/store/apps/details?id=com.bitbox.spliteven" class="store-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+                    <div class="store-btn-text">
+                        <small>Get it on</small>
+                        <span>Google Play</span>
+                    </div>
+                </a>
+                <a href="#" class="store-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+                    <div class="store-btn-text">
+                        <small>Coming Soon on the</small>
+                        <span>App Store</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- FAQ PAGE -->
+    <div id="faq" class="page">
+        <section class="page-hero">
+            <h1>Frequently Asked Questions</h1>
+            <p>Find answers to common questions about SplitEven</p>
+        </section>
+        <section class="page-content">
+            <div class="content-container">
+                <div class="faq-item">
+                    <button class="faq-question">How does SplitEven work?</button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            SplitEven makes splitting bills easy in just a few steps: Take a photo of your receipt, and our AI automatically reads all the items and prices. Then add the friends who are splitting the bill, tap to assign items to each person, and SplitEven calculates exactly what everyone owes including their fair share of tax and tip.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Is SplitEven free to use?</button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes! SplitEven is free to download and use. You can scan receipts and split bills without any subscription or payment required. We may offer optional premium features in the future, but the core bill-splitting functionality will always be free.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">What types of receipts can I scan?</button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            SplitEven works with most printed receipts from restaurants, cafes, bars, and retail stores. For best results, make sure the receipt is flat, well-lit, and the text is clearly visible. The app supports receipts in multiple languages and currencies.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">How is tax and tip calculated?</button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Tax and tip are split proportionally based on the total of items each person is paying for. For example, if you ordered $30 worth of food and your friend ordered $20, you would pay 60% of the tax and tip while your friend pays 40%. This ensures everyone pays their fair share.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Can I split items between multiple people?</button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Absolutely! If multiple people shared an item (like a pizza or appetizer), you can assign that item to all the people who shared it. The cost will be divided equally among them automatically.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Does SplitEven work offline?</button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes! Once you've scanned a receipt, you can assign items and calculate splits without an internet connection. This is perfect for when you're at a restaurant with poor cell service.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Can I edit items if the scan isn't perfect?</button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes, you can easily edit any item name, price, or quantity after scanning. You can also add items manually if something was missed. We want to make sure your split is always accurate.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">How do I share the split with my friends?</button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            After calculating the split, you can share each person's total via text message, email, WhatsApp, or any other messaging app on your phone. The shared message includes a clear breakdown of what they owe.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Is my data safe and private?</button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Your privacy is our priority. Receipt images are processed on your device and are not stored on our servers. We don't collect, sell, or share your personal information. Please see our Privacy Policy for complete details.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">What if I have a question not answered here?</button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We're happy to help! Visit our Support page to send us a message and we'll get back to you as soon as possible. You can also email us directly at support@spliteven.app
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PRIVACY POLICY PAGE -->
+    <div id="privacy" class="page">
+        <section class="page-hero">
+            <h1>Privacy Policy</h1>
+            <p>Last updated: February 2026</p>
+        </section>
+        <section class="page-content">
+            <div class="content-container">
+                <h2>Our Commitment to Your Privacy</h2>
+                <p>At SplitEven, we believe that your personal information belongs to you. We've built our app with privacy as a core principle, collecting only what's necessary to provide you with a great bill-splitting experience.</p>
+
+                <h2>Information We Collect</h2>
+                
+                <h3>Information You Provide</h3>
+                <ul>
+                    <li><strong>Friend Names:</strong> When you add friends to split bills with, we store their names locally on your device so you can easily select them for future splits.</li>
+                    <li><strong>Receipt Data:</strong> When you scan a receipt, the item names, prices, and totals are extracted and stored temporarily on your device to calculate the split.</li>
+                    <li><strong>Support Communications:</strong> If you contact us for support, we keep records of our conversations to help resolve your issues.</li>
+                </ul>
+
+                <h3>Information Collected Automatically</h3>
+                <ul>
+                    <li><strong>Usage Data:</strong> We collect basic information about how you use the app (like which features you use most) to help us improve SplitEven. This data is anonymous and cannot be used to identify you.</li>
+                    <li><strong>Device Information:</strong> We may collect general device information (like device type and operating system version) to ensure the app works properly on your device.</li>
+                    <li><strong>Crash Reports:</strong> If the app crashes, we receive anonymous error reports to help us fix bugs and improve stability.</li>
+                </ul>
+
+                <h2>How We Use Your Information</h2>
+                <p>We use the information we collect to:</p>
+                <ul>
+                    <li>Provide the bill-splitting features you use</li>
+                    <li>Remember your friends for easier future splits</li>
+                    <li>Improve the app based on how people use it</li>
+                    <li>Fix bugs and technical issues</li>
+                    <li>Respond to your support requests</li>
+                </ul>
+
+                <h2>What We Don't Do</h2>
+                <p>We want to be clear about what we will never do with your information:</p>
+                <ul>
+                    <li>We don't sell your personal information to anyone</li>
+                    <li>We don't store your receipt images on our servers</li>
+                    <li>We don't share your data with advertisers</li>
+                    <li>We don't track your location</li>
+                    <li>We don't read the contents of your messages when you share splits</li>
+                </ul>
+
+                <h2>Data Storage</h2>
+                <p>Most of your data (including your friends list and split history) is stored locally on your device, not on our servers. This means:</p>
+                <ul>
+                    <li>Your data stays with you and under your control</li>
+                    <li>If you delete the app, your local data is deleted too</li>
+                    <li>You can clear your data anytime from the app settings</li>
+                </ul>
+
+                <h2>Third-Party Services</h2>
+                <p>SplitEven may use trusted third-party services to help provide certain features. These services have their own privacy policies and handle data according to their terms. We only work with services that meet our privacy standards.</p>
+
+                <h2>Children's Privacy</h2>
+                <p>SplitEven is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us.</p>
+
+                <h2>Your Rights</h2>
+                <p>You have the right to:</p>
+                <ul>
+                    <li>Access the personal information we have about you</li>
+                    <li>Request deletion of your data</li>
+                    <li>Opt out of analytics collection (in app settings)</li>
+                    <li>Contact us with privacy questions or concerns</li>
+                </ul>
+
+                <h2>Changes to This Policy</h2>
+                <p>We may update this Privacy Policy from time to time. When we make significant changes, we'll notify you through the app or by other means. We encourage you to review this policy periodically.</p>
+
+                <h2>Contact Us</h2>
+                <p>If you have any questions about this Privacy Policy or our privacy practices, please contact us at:</p>
+                <p><strong>Email:</strong> privacy@spliteven.app</p>
+                <p>We take your privacy seriously and will respond to your inquiries promptly.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>SplitEven</h3>
+                <p>The smartest way to split bills with friends. Fair, fast, and hassle-free.</p>
+            </div>
+            <div class="footer-links">
+                <h4>App</h4>
+                <ul>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.bitbox.spliteven">Download Android</a></li>
+                    <li><a href="#">Download iOS</a></li>
+                    <li><a href="faq.html">Help Center</a></li>
+                </ul>
+            </div>
+            <!-- <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#" onclick="showPage('support')">Help Center</a></li>
+                    <li><a href="mailto:support@spliteven.app">Contact Us</a></li>
+                    <li><a href="mailto:feedback@spliteven.app">Feedback</a></li>
+                </ul>
+            </div> -->
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="support.html">Contact Support</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 SplitEven. All rights reserved. Made with ❤️ for fair bill splitting.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update nav links
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Find and activate the clicked link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if (link.getAttribute('onclick')?.includes(pageId)) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Close mobile menu
+            document.getElementById('navLinks').classList.remove('active');
+            
+            // Update URL hash
+            window.history.pushState(null, null, `#${pageId}`);
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Form Submit Handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for your message! We\'ll get back to you soon.');
+            event.target.reset();
+        }
+
+        // Handle URL hash on page load
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.slice(1);
+            if (hash && document.getElementById(hash)) {
+                showPage(hash);
+            }
+        });
+
+        // Handle browser back/forward
+        window.addEventListener('popstate', () => {
+            const hash = window.location.hash.slice(1) || 'home';
+            if (document.getElementById(hash)) {
+                showPage(hash);
+            }
+        });
+    </script>
+</body>
+</html>
