@@ -1,0 +1,8 @@
+# robots.txt — getspliteven.com
+# Allow all crawlers full access
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://getspliteven.com/sitemap.xml

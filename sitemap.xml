@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Homepage — highest priority, all 5 market hreflang signals -->
+  <url>
+    <loc>https://getspliteven.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en-us"    href="https://getspliteven.com/"/>
+    <xhtml:link rel="alternate" hreflang="en-gb"    href="https://getspliteven.com/"/>
+    <xhtml:link rel="alternate" hreflang="en-in"    href="https://getspliteven.com/"/>
+    <xhtml:link rel="alternate" hreflang="en-ca"    href="https://getspliteven.com/"/>
+    <xhtml:link rel="alternate" hreflang="en-au"    href="https://getspliteven.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getspliteven.com/"/>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- FAQ — high value for Google rich results -->
+  <url>
+    <loc>https://getspliteven.com/faq.html</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Support -->
+  <url>
+    <loc>https://getspliteven.com/support.html</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://getspliteven.com/privacy.html</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Terms of Service -->
+  <url>
+    <loc>https://getspliteven.com/terms.html</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>
