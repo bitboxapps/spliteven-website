@@ -24,7 +24,7 @@
     <meta property="og:url" content="https://getspliteven.com/">
     <meta property="og:title" content="SplitEven – AI Bill Splitter &amp; Receipt Scanner App">
     <meta property="og:description" content="Split bills instantly by scanning any receipt. AI assigns items, calculates tax &amp; tip, and shares via WhatsApp. Multi-currency. Free on Android.">
-    <meta property="og:image" content="https://getspliteven.com/images/screenshot-1.jpg">
+    <meta property="og:image" content="https://getspliteven.com/assets/images/screenshot-1.jpg">
     <meta property="og:image:width" content="1080">
     <meta property="og:image:height" content="1920">
     <meta property="og:site_name" content="SplitEven">
@@ -36,7 +36,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="SplitEven – AI Bill Splitter &amp; Receipt Scanner App">
     <meta name="twitter:description" content="Split bills instantly by scanning any receipt. AI assigns items, calculates tax &amp; tip, and shares via WhatsApp. Free on Android.">
-    <meta name="twitter:image" content="https://getspliteven.com/images/screenshot-1.jpg">
+    <meta name="twitter:image" content="https://getspliteven.com/assets/images/screenshot-1.jpg">
 
     <!-- ═══════════════════════════════════════════════════
          HREFLANG — 5 MARKETS
@@ -66,10 +66,10 @@
       },
       "installUrl": "https://play.google.com/store/apps/details?id=com.bitbox.spliteven",
       "screenshot": [
-        "https://getspliteven.com/images/screenshot-1.jpg",
-        "https://getspliteven.com/images/screenshot-2.jpg",
-        "https://getspliteven.com/images/screenshot-3.jpg",
-        "https://getspliteven.com/images/screenshot-4.jpg"
+        "https://getspliteven.com/assets/images/screenshot-1.jpg",
+        "https://getspliteven.com/assets/images/screenshot-2.jpg",
+        "https://getspliteven.com/assets/images/screenshot-3.jpg",
+        "https://getspliteven.com/assets/images/screenshot-4.jpg"
       ],
       "featureList": [
         "AI receipt scanner",
@@ -86,7 +86,7 @@
         "url": "https://getspliteven.com",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://getspliteven.com/assets/spliteven_logo.png"
+          "url": "https://getspliteven.com/assets/images/spliteven_logo.png"
         }
       }
     }
@@ -107,7 +107,7 @@
         "name": "BitBox Apps",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://getspliteven.com/assets/spliteven_logo.png"
+          "url": "https://getspliteven.com/assets/images/spliteven_logo.png"
         }
       }
     }
@@ -996,6 +996,260 @@
                 font-size: 2rem;
             }
         }
+
+        /* ─── Demo Video Section ─── */
+        .demo-video {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, #F8FAFC 0%, #EEF2FF 60%, #F8FAFC 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-video::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, rgba(99,102,241,0.10) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .demo-video::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .demo-badge {
+            display: inline-block;
+            background: var(--primary-container);
+            color: var(--primary-dark);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.35rem 1rem;
+            border-radius: 100px;
+            margin-bottom: 1rem;
+            letter-spacing: 0.02em;
+        }
+
+        .demo-video-wrapper {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 5rem;
+            align-items: center;
+            max-width: 960px;
+            margin: 3rem auto 0;
+        }
+
+        /* Phone Frame */
+        .phone-frame {
+            width: 255px;
+            flex-shrink: 0;
+            background: #16162a;
+            border-radius: 46px;
+            padding: 12px;
+            box-shadow:
+                0 0 0 2px #2e2e4a,
+                0 40px 80px rgba(0, 0, 0, 0.30),
+                0 0 100px rgba(99, 102, 241, 0.18);
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .phone-notch {
+            width: 96px;
+            height: 22px;
+            background: #16162a;
+            border-radius: 0 0 16px 16px;
+            margin: 0 auto 3px;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 18px;
+        }
+
+        .phone-notch::after {
+            content: '';
+            width: 9px;
+            height: 9px;
+            background: #2a2a40;
+            border-radius: 50%;
+        }
+
+        .phone-screen {
+            background: #000;
+            border-radius: 34px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 9 / 19.5;
+        }
+
+        .phone-screen video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-play-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.42);
+            backdrop-filter: blur(3px);
+            cursor: pointer;
+            transition: opacity 0.35s ease;
+            z-index: 2;
+            border-radius: 34px;
+        }
+
+        .video-play-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .play-btn {
+            width: 62px;
+            height: 62px;
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 8px 28px rgba(99, 102, 241, 0.55);
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            background: var(--primary-dark);
+            box-shadow: 0 12px 36px rgba(99, 102, 241, 0.65);
+        }
+
+        .play-btn svg {
+            width: 26px;
+            height: 26px;
+            fill: white;
+            margin-left: 3px;
+        }
+
+        .play-label {
+            color: rgba(255, 255, 255, 0.88);
+            font-size: 0.78rem;
+            margin-top: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+        }
+
+        .phone-home-bar {
+            width: 90px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.22);
+            border-radius: 4px;
+            margin: 10px auto 2px;
+        }
+
+        /* Right side: feature list + CTA */
+        .demo-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1.6rem;
+        }
+
+        .demo-feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .demo-feature-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            width: 46px;
+            height: 46px;
+            background: white;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+            line-height: 1;
+        }
+
+        .demo-feature-item h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--on-surface);
+            margin-bottom: 0.2rem;
+        }
+
+        .demo-feature-item p {
+            font-size: 0.88rem;
+            color: var(--on-surface-variant);
+            line-height: 1.55;
+        }
+
+        .demo-cta {
+            margin-top: 0.5rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--outline);
+        }
+
+        .btn-demo-download {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 0.875rem 1.75rem;
+            border-radius: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.30);
+        }
+
+        .btn-demo-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 34px rgba(99, 102, 241, 0.42);
+        }
+
+        @media (max-width: 820px) {
+            .demo-video-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+
+            .phone-frame {
+                width: 220px;
+            }
+
+            .demo-feature-item {
+                text-align: left;
+            }
+
+            .demo-cta {
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1004,7 +1258,7 @@
         <div class="nav-container">
             <a href="#" class="logo" onclick="showPage('home')">
                 <div class="logo-icon">
-                    <img src="assets/spliteven_logo.png" alt="SplitEven Logo" class="logo-img">
+                    <img src="assets/images/spliteven_logo.png" alt="SplitEven Logo" class="logo-img">
                 </div>
                 SplitEven
             </a>
@@ -1043,8 +1297,8 @@
                     </div>
                 </div>
                 <div class="hero-phones">
-                    <img src="images/screenshot-1.jpg" alt="SplitEven App Screenshot" class="phone-mockup">
-                    <img src="images/screenshot-2.jpg" alt="SplitEven App Screenshot" class="phone-mockup secondary">
+                    <img src="assets/images/screenshot-1.jpg" alt="SplitEven App Screenshot" class="phone-mockup">
+                    <img src="assets/images/screenshot-2.jpg" alt="SplitEven App Screenshot" class="phone-mockup secondary">
                 </div>
             </div>
         </section>
@@ -1123,6 +1377,70 @@
             </div>
         </section>
 
+        <!-- Demo Video Section -->
+        <section class="demo-video">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="demo-badge">📱 App Demo</span>
+                    <h2>Watch SplitEven in Action</h2>
+                    <p>See how effortlessly you can scan a receipt and split it with friends in under 30 seconds.</p>
+                </div>
+                <div class="demo-video-wrapper">
+                    <!-- Phone Frame with Video -->
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <video id="demoVideo" src="assets/videos/app_demo.mp4" playsinline loop muted preload="metadata"></video>
+                            <div class="video-play-overlay" id="playOverlay">
+                                <button class="play-btn" id="playBtn" aria-label="Play demo video">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                </button>
+                                <p class="play-label">Tap to play</p>
+                            </div>
+                        </div>
+                        <div class="phone-home-bar"></div>
+                    </div>
+                    <!-- Feature Highlights + CTA -->
+                    <div class="demo-features">
+                        <div class="demo-feature-item">
+                            <span class="demo-feature-icon">⚡</span>
+                            <div>
+                                <h4>Scan in seconds</h4>
+                                <p>Point your camera at any receipt and our AI extracts every item, tax, and tip automatically.</p>
+                            </div>
+                        </div>
+                        <div class="demo-feature-item">
+                            <span class="demo-feature-icon">🎯</span>
+                            <div>
+                                <h4>Assign with a tap</h4>
+                                <p>Tap items to assign them to the right person — shared items split proportionally.</p>
+                            </div>
+                        </div>
+                        <div class="demo-feature-item">
+                            <span class="demo-feature-icon">📊</span>
+                            <div>
+                                <h4>Fair every time</h4>
+                                <p>Tax and tip are distributed based on what each person ordered. No more rounding guesswork.</p>
+                            </div>
+                        </div>
+                        <div class="demo-feature-item">
+                            <span class="demo-feature-icon">📤</span>
+                            <div>
+                                <h4>Share instantly</h4>
+                                <p>Send each person their itemized breakdown via WhatsApp, iMessage, or any app.</p>
+                            </div>
+                        </div>
+                        <div class="demo-cta">
+                            <a href="https://play.google.com/store/apps/details?id=com.bitbox.spliteven" class="btn-demo-download">
+                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+                                Download Free on Android
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Screenshots Showcase -->
         <section class="showcase">
             <div class="section-container">
@@ -1132,16 +1450,16 @@
                 </div>
                 <div class="screenshots-scroll">
                     <div class="screenshot-item">
-                        <img src="images/screenshot-1.jpg" alt="Scan receipt screen">
+                        <img src="assets/images/screenshot-1.jpg" alt="Scan receipt screen">
                     </div>
                     <div class="screenshot-item">
-                        <img src="images/screenshot-2.jpg" alt="Split with friends">
+                        <img src="assets/images/screenshot-2.jpg" alt="Split with friends">
                     </div>
                     <div class="screenshot-item">
-                        <img src="images/screenshot-3.jpg" alt="Assign items">
+                        <img src="assets/images/screenshot-3.jpg" alt="Assign items">
                     </div>
                     <div class="screenshot-item">
-                        <img src="images/screenshot-4.jpg" alt="Summary view">
+                        <img src="assets/images/screenshot-4.jpg" alt="Summary view">
                     </div>
                 </div>
             </div>
@@ -1426,6 +1744,43 @@
         function toggleMobileMenu() {
             document.getElementById('navLinks').classList.toggle('active');
         }
+
+        // Demo Video — play / pause
+        (function () {
+            const video   = document.getElementById('demoVideo');
+            const overlay = document.getElementById('playOverlay');
+            if (!video || !overlay) return;
+
+            function play() {
+                video.play();
+                overlay.classList.add('hidden');
+            }
+
+            function pause() {
+                video.pause();
+                overlay.classList.remove('hidden');
+            }
+
+            function toggle() {
+                video.paused ? play() : pause();
+            }
+
+            overlay.addEventListener('click', toggle);
+            video.addEventListener('click', toggle);
+
+            // Auto-play when ≥50% of the video is in the viewport; pause when not
+            const ioObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        play();
+                    } else {
+                        pause();
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            ioObserver.observe(video);
+        })();
 
         // FAQ Accordion
         document.querySelectorAll('.faq-question').forEach(button => {
