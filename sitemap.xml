@@ -48,4 +48,52 @@
     <priority>0.3</priority>
   </url>
 
+  <!-- Blog index -->
+  <url>
+    <loc>https://getspliteven.com/blog.html</loc>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog Post 1 -->
+  <url>
+    <loc>https://getspliteven.com/blog/how-to-split-restaurant-bill-fairly.html</loc>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Post 2 -->
+  <url>
+    <loc>https://getspliteven.com/blog/how-to-split-expenses-with-roommates.html</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Post 3 -->
+  <url>
+    <loc>https://getspliteven.com/blog/best-bill-splitting-apps-android-2026.html</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Post 4 -->
+  <url>
+    <loc>https://getspliteven.com/blog/how-to-track-group-trip-expenses.html</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Post 5 -->
+  <url>
+    <loc>https://getspliteven.com/blog/how-to-split-bills-with-friends.html</loc>
+    <lastmod>2026-04-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>

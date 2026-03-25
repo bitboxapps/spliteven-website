@@ -1559,6 +1559,7 @@
             </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
                 <li><a href="faq.html">FAQ</a></li>
                 <li><a href="support.html">Support</a></li>
                 <li><a href="privacy.html">Privacy Policy</a></li>
@@ -2050,14 +2051,12 @@
                     <li><a href="faq.html">FAQ</a></li>
                 </ul>
             </div>
-            <!-- <div class="footer-links">
-                <h4>Support</h4>
+            <div class="footer-links">
+                <h4>Content</h4>
                 <ul>
-                    <li><a href="#" onclick="showPage('support')">FAQ</a></li>
-                    <li><a href="mailto:support@spliteven.app">Contact Us</a></li>
-                    <li><a href="mailto:feedback@spliteven.app">Feedback</a></li>
+                    <li><a href="blog.html">Blog</a></li>
                 </ul>
-            </div> -->
+            </div>
             <div class="footer-links">
                 <h4>Legal</h4>
                 <ul>
@@ -2193,89 +2192,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
-    <script>
-        // ── FIREBASE CONFIG ──────────────────────────────────────────────────
-        // Replace the values below with your Firebase project config.
-        // Find it in: Firebase Console → Project Settings → Your Apps → Web App → SDK setup
-        const firebaseConfig = {
-            apiKey:            "AIzaSyAwoD7bU2sduJ1RWHKHvjJRK0BzZ52su-0",
-            authDomain:        "split-even-prod.firebaseapp.com",
-            projectId:         "split-even-prod",
-            storageBucket:     "split-even-prod.firebasestorage.app",
-            messagingSenderId: "137123762020",
-            appId:             "1:137123762020:web:75b47566ecacccfedeb471"
-        };
-
-        let db = null;
-        try {
-            firebase.initializeApp(firebaseConfig);
-            db = firebase.firestore();
-        } catch (e) {
-            console.warn('Firebase not configured yet — waitlist submissions will be skipped.');
-        }
-
-        // ── MODAL CONTROLS ───────────────────────────────────────────────────
-        function openWaitlistModal(e) {
-            if (e) e.preventDefault();
-            document.getElementById('waitlistModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-            setTimeout(function () {
-                var el = document.getElementById('modalEmail');
-                if (el) el.focus();
-            }, 280);
-        }
-
-        function closeWaitlistModal() {
-            document.getElementById('waitlistModal').classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        function handleModalOverlayClick(e) {
-            if (e.target === document.getElementById('waitlistModal')) {
-                closeWaitlistModal();
-            }
-        }
-
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') closeWaitlistModal();
-        });
-
-        // ── FORM SUBMISSION ──────────────────────────────────────────────────
-        async function handleWaitlistSubmit(e, source) {
-            e.preventDefault();
-
-            var isModal    = source === 'modal';
-            var emailEl    = document.getElementById(isModal ? 'modalEmail'      : 'sectionEmail');
-            var betaEl     = document.getElementById(isModal ? 'modalBeta'       : 'sectionBeta');
-            var btnEl      = document.getElementById(isModal ? 'modalSubmitBtn'  : 'sectionSubmitBtn');
-            var formEl     = document.getElementById(isModal ? 'modalFormWrapper': 'waitlistSectionForm');
-            var successEl  = document.getElementById(isModal ? 'modalSuccess'    : 'waitlistSectionSuccess');
-
-            var email = emailEl.value.trim();
-            var beta  = betaEl.checked;
-            if (!email) return;
-
-            btnEl.disabled    = true;
-            btnEl.textContent = 'Joining...';
-
-            try {
-                if (db) {
-                    await db.collection('ios_waitlist').add({
-                        email:      email,
-                        betaTester: beta,
-                        source:     source,
-                        createdAt:  firebase.firestore.FieldValue.serverTimestamp()
-                    });
-                }
-                formEl.style.display = 'none';
-                successEl.classList.add('show');
-            } catch (err) {
-                console.error('Waitlist submission error:', err);
-                btnEl.disabled    = false;
-                btnEl.textContent = isModal ? 'Get Notified for iOS →' : 'Join the iOS Waitlist →';
-                alert('Something went wrong. Please try again.');
-            }
-        }
-    </script>
+    <!-- iOS Waitlist Modal — shared JS (single source of truth) -->
+    <script src="assets/js/waitlist-modal.js"></script>
 </body>
 </html>
