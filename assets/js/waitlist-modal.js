@@ -18,6 +18,17 @@ var db = null;
     try {
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
+            // ── App Check (reCAPTCHA v3) ──────────────────────────────
+            // Must be activated immediately after initializeApp and only
+            // once. Attaches a verified token to every Firestore request
+            // (ios_waitlist writes). Monitoring mode is still active so
+            // nothing is blocked — this converts unverified → verified.
+            // Site key covers getspliteven.com and admin.getspliteven.com
+            // Author: Anurag Singla | Date: 27-03-2026
+            firebase.appCheck().activate(
+                '6LfhLZosAAAAANYRHWQWpd6vmjR4TBd6XKGzhJMs',
+                true  // auto-refresh token in long-running sessions
+            );
         }
         db = firebase.firestore();
     } catch (e) {
