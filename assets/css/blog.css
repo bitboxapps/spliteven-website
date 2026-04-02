@@ -515,10 +515,38 @@ body {
     .nav-links a { padding: 1rem; border-bottom: 1px solid var(--outline); }
     .mobile-menu-btn { display: block; }
     .blog-grid { grid-template-columns: 1fr; }
+    .page-hero { padding: 6rem 1.5rem 3rem; }
     .page-hero h1 { font-size: 2rem; }
+    .post-hero { padding: 6rem 1.5rem 3rem; }
     .post-hero h1 { font-size: 1.75rem; }
+    .post-breadcrumb { font-size: 0.8rem; }
+    .article-wrap { padding: 2rem 1.25rem; }
+    .article-body { padding: 0; }
     .article-cta { flex-direction: column; }
+    .article-cta .btn { width: 100%; text-align: center; justify-content: center; }
+    .post-nav { flex-direction: column; gap: 0.75rem; }
+    .post-nav .btn { width: 100%; text-align: center; justify-content: center; }
     .footer-container { grid-template-columns: 1fr; text-align: center; }
     .footer-brand p { max-width: none; }
-    .post-meta-bar { gap: 0.75rem; }
+    .post-meta-bar { gap: 0.75rem; flex-wrap: wrap; }
+}
+
+@media (max-width: 480px) {
+    .nav-container { padding: 0.875rem 1.25rem; }
+    .page-hero { padding: 5.5rem 1.25rem 2.5rem; }
+    .page-hero h1 { font-size: 1.65rem; }
+    .post-hero { padding: 5.5rem 1.25rem 2rem; }
+    .post-hero h1 { font-size: 1.45rem; }
+    .post-tag { font-size: 0.72rem; }
+    .post-meta-bar { font-size: 0.8rem; }
+    .article-wrap { padding: 1.5rem 1rem; }
+    .article-body h2 { font-size: 1.3rem; }
+    .article-body h3 { font-size: 1.1rem; }
+    .article-body p, .article-body li { font-size: 0.95rem; }
+    .blog-card-content { padding: 1.25rem; }
+    .blog-card-title { font-size: 1.1rem; }
+    .modal-card { border-radius: 20px; }
+    .modal-header { padding: 1.5rem 1.25rem 1.25rem; }
+    .modal-body { padding: 1.25rem; }
+    .footer-container { padding: 0 1rem; }
 }
