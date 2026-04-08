@@ -479,47 +479,37 @@
             font-size: 0.9rem;
         }
 
-        /* Screenshots Showcase */
-        .showcase {
-            padding: 6rem 2rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            overflow: hidden;
+        /* ─── Social Proof Strip ─────────────────────────────────────── */
+        /* ─── Social Proof Strip ─────────────────────────────────────── */
+        .social-proof-strip {
+            background: #F8FAFC;
+            border-top: 1px solid var(--outline);
+            border-bottom: 1px solid var(--outline);
+            padding: 1.25rem 2rem;
         }
-
-        .showcase .section-header h2,
-        .showcase .section-header p {
-            color: white;
-        }
-
-        .showcase .section-header p {
-            opacity: 0.9;
-        }
-
-        .screenshots-scroll {
+        .social-proof-inner {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
-            gap: 2rem;
+            align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 3rem;
+            gap: 1.5rem;
         }
-
-        .screenshot-item {
-            width: 220px;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
+        .social-proof-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--on-surface-variant);
+            white-space: nowrap;
         }
-
-        .screenshot-item:hover {
-            transform: scale(1.05);
+        .social-proof-divider {
+            width: 1px;
+            height: 28px;
+            background: var(--outline);
         }
-
-        .screenshot-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+        .ph-badge-link { display: flex; align-items: center; }
+        .ph-badge-link img { height: 40px; width: auto; display: block; }
 
         /* CTA Section */
         .cta {
@@ -1586,11 +1576,6 @@
                             Get Notified for iOS
                         </a>
                     </div>
-                    <div style="margin-top: 1.5rem;">
-                        <a href="https://www.producthunt.com/products/spliteven?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-spliteven" target="_blank" rel="noopener noreferrer">
-                            <img alt="SplitEven - AI receipt scanner to split bills instantly. | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1098787&theme=neutral&t=1773573942486">
-                        </a>
-                    </div>
                 </div>
                 <div class="hero-phones">
                     <img src="assets/images/screenshot-1.jpg" alt="SplitEven App Screenshot" class="phone-mockup">
@@ -1732,30 +1717,6 @@
                                 Download Free on Android
                             </a>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Screenshots Showcase -->
-        <section class="showcase">
-            <div class="section-container">
-                <div class="section-header">
-                    <h2>See It In Action</h2>
-                    <p>Beautiful, intuitive design that makes bill splitting a breeze</p>
-                </div>
-                <div class="screenshots-scroll">
-                    <div class="screenshot-item">
-                        <img src="assets/images/screenshot-1.jpg" alt="Scan receipt screen">
-                    </div>
-                    <div class="screenshot-item">
-                        <img src="assets/images/screenshot-2.jpg" alt="Split with friends">
-                    </div>
-                    <div class="screenshot-item">
-                        <img src="assets/images/screenshot-3.jpg" alt="Assign items">
-                    </div>
-                    <div class="screenshot-item">
-                        <img src="assets/images/screenshot-4.jpg" alt="Summary view">
                     </div>
                 </div>
             </div>
@@ -2036,6 +1997,17 @@
         </div>
     </div>
 
+    <!-- Social Proof Strip -->
+    <section class="social-proof-strip">
+        <div class="social-proof-inner">
+            <span class="social-proof-label">Featured on</span>
+            <div class="social-proof-divider"></div>
+            <a href="https://www.producthunt.com/products/spliteven" target="_blank" rel="noopener noreferrer" class="ph-badge-link">
+                <img id="phBadge" alt="SplitEven on Product Hunt">
+            </a>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
@@ -2195,5 +2167,15 @@
 
     <!-- iOS Waitlist Modal — shared JS (single source of truth) -->
     <script src="assets/js/waitlist-modal.js"></script>
+    <script>
+        // Product Hunt badge — dynamic timestamp forces fresh upvote count every page load
+        (function () {
+            var badge = document.getElementById('phBadge');
+            if (badge) {
+                badge.src = 'https://api.producthunt.com/widgets/embed-image/v1/featured.svg'
+                    + '?post_id=1098787&theme=neutral&t=' + Date.now();
+            }
+        })();
+    </script>
 </body>
 </html>
