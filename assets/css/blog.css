@@ -512,7 +512,7 @@ body {
         box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
     .nav-links.active { display: flex; }
-    .nav-links a { padding: 1rem; border-bottom: 1px solid var(--outline); }
+    .nav-links li { padding: 0.75rem 1rem; border-bottom: 1px solid var(--outline); }
     .mobile-menu-btn { display: block; }
     .blog-grid { grid-template-columns: 1fr; }
     .page-hero h1 { font-size: 2rem; }

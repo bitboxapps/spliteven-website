@@ -762,121 +762,6 @@
             line-height: 1.7;
         }
 
-        /* Support Page */
-        .support-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .support-card {
-            padding: 2rem;
-            background: var(--background);
-            border-radius: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .support-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.1);
-        }
-
-        .support-icon {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 1rem;
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        .support-card h3 {
-            font-size: 1.125rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--on-surface);
-        }
-
-        .support-card p {
-            color: var(--on-surface-variant);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .support-card a {
-            color: var(--primary);
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .support-card a:hover {
-            text-decoration: underline;
-        }
-
-        .contact-form {
-            background: var(--background);
-            padding: 2rem;
-            border-radius: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            color: var(--on-surface);
-            margin-bottom: 0.5rem;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid var(--outline);
-            border-radius: 12px;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: border-color 0.2s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
-        }
-
         /* Hide all pages except home by default */
         .page {
             display: none;
@@ -936,10 +821,7 @@
                 display: flex;
             }
 
-            .nav-links a {
-                padding: 1rem;
-                border-bottom: 1px solid var(--outline);
-            }
+            .nav-links li { padding: 0.75rem 1rem; border-bottom: 1px solid var(--outline); }
 
             .mobile-menu-btn {
                 display: block;
@@ -966,10 +848,6 @@
             }
 
             .steps-container {
-                grid-template-columns: 1fr;
-            }
-
-            .support-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1872,7 +1750,7 @@
                     <button class="faq-question">What if I have a question not answered here?</button>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            We're happy to help! Visit our Support page to send us a message and we'll get back to you as soon as possible. You can also email us directly at support@spliteven.app
+                            We're happy to help! Visit our Support page to send us a message and we'll get back to you as soon as possible. You can also email us directly at bitbox.apps.contact@gmail.com
                         </div>
                     </div>
                 </div>
@@ -1889,73 +1767,53 @@
         <section class="page-content">
             <div class="content-container">
                 <h2>Our Commitment to Your Privacy</h2>
-                <p>At SplitEven, we believe that your personal information belongs to you. We've built our app with privacy as a core principle, collecting only what's necessary to provide you with a great bill-splitting experience.</p>
+                <p>At SplitEven, we believe your personal information belongs to you. We've designed our app to be simple and transparent, collecting only the information needed to help you split bills effortlessly with your friends.</p>
 
                 <h2>Information We Collect</h2>
-                
+
                 <h3>Information You Provide</h3>
                 <ul>
-                    <li><strong>Friend Names:</strong> When you add friends to split bills with, we store their names locally on your device so you can easily select them for future splits.</li>
-                    <li><strong>Receipt Data:</strong> When you scan a receipt, the item names, prices, and totals are extracted and stored temporarily on your device to calculate the split.</li>
-                    <li><strong>Support Communications:</strong> If you contact us for support, we keep records of our conversations to help resolve your issues.</li>
+                    <li><strong>Friend Names:</strong> When you add friends to a split, we save their names so you can find them easily next time.</li>
+                    <li><strong>Receipt Photos:</strong> When you scan a receipt, the image is sent to our secure servers to allow our AI to read the items and prices for you.</li>
+                    <li><strong>Contact Info:</strong> If you send us a message through our Support Center, we keep a record of your email to help solve your issue.</li>
                 </ul>
 
                 <h3>Information Collected Automatically</h3>
                 <ul>
-                    <li><strong>Usage Data:</strong> We collect basic information about how you use the app (like which features you use most) to help us improve SplitEven. This data is anonymous and cannot be used to identify you.</li>
-                    <li><strong>Device Information:</strong> We may collect general device information (like device type and operating system version) to ensure the app works properly on your device.</li>
-                    <li><strong>Crash Reports:</strong> If the app crashes, we receive anonymous error reports to help us fix bugs and improve stability.</li>
+                    <li><strong>Unique ID:</strong> We use a secure, anonymous ID (via Firebase) to keep your receipt history organised just for you.</li>
+                    <li><strong>Usage Data:</strong> We look at basic, anonymous info (like which buttons are clicked most) to help make the app better.</li>
+                    <li><strong>Crash Reports:</strong> If the app stops working, we get a technical report so we can fix the bug.</li>
                 </ul>
 
                 <h2>How We Use Your Information</h2>
-                <p>We use the information we collect to:</p>
+                <p>We use your data to make bill splitting fast and fair:</p>
                 <ul>
-                    <li>Provide the bill-splitting features you use</li>
-                    <li>Remember your friends for easier future splits</li>
-                    <li>Improve the app based on how people use it</li>
-                    <li>Fix bugs and technical issues</li>
-                    <li>Respond to your support requests</li>
+                    <li>To turn your receipt photos into an itemised list using our AI.</li>
+                    <li>To show you your past split history when you use the app.</li>
+                    <li>To calculate the exact tax and tip for each person in your group.</li>
                 </ul>
 
-                <h2>What We Don't Do</h2>
-                <p>We want to be clear about what we will never do with your information:</p>
+                <h2>Our Privacy Promise</h2>
+                <p>We will never:</p>
                 <ul>
-                    <li>We don't sell your personal information to anyone</li>
-                    <li>We don't store your receipt images on our servers</li>
-                    <li>We don't share your data with advertisers</li>
-                    <li>We don't track your location</li>
-                    <li>We don't read the contents of your messages when you share splits</li>
+                    <li>Sell your personal information to anyone.</li>
+                    <li>Share your private receipts with other people.</li>
+                    <li>Read your private messages when you share a split summary.</li>
+                    <li>Track your physical location.</li>
                 </ul>
 
-                <h2>Data Storage</h2>
-                <p>Most of your data (including your friends list and split history) is stored locally on your device, not on our servers. This means:</p>
-                <ul>
-                    <li>Your data stays with you and under your control</li>
-                    <li>If you delete the app, your local data is deleted too</li>
-                    <li>You can clear your data anytime from the app settings</li>
-                </ul>
+                <h2>Advertising</h2>
+                <p>To keep the core features of SplitEven free for everyone, we show ads using Google AdMob. You may see full-screen ads that appear occasionally after a split is completed, or optional rewarded ads you can choose to watch to earn extra receipt scans. These ad services may use an anonymous ID from your device to show relevant ads, but SplitEven does not share your receipt data or friend lists with advertisers.</p>
 
-                <h2>Third-Party Services</h2>
-                <p>SplitEven may use trusted third-party services to help provide certain features. These services have their own privacy policies and handle data according to their terms. We only work with services that meet our privacy standards.</p>
-
-                <h2>Children's Privacy</h2>
-                <p>SplitEven is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us.</p>
-
-                <h2>Your Rights</h2>
-                <p>You have the right to:</p>
-                <ul>
-                    <li>Access the personal information we have about you</li>
-                    <li>Request deletion of your data</li>
-                    <li>Opt out of analytics collection (in app settings)</li>
-                    <li>Contact us with privacy questions or concerns</li>
-                </ul>
+                <h2>Data Storage &amp; Security</h2>
+                <p>Your friends list and app preferences are stored locally on your device. Receipt images are sent to our secure servers for AI processing but are not shared with third parties for marketing. If you uninstall the app, your local history will be deleted and cannot be recovered.</p>
 
                 <h2>Changes to This Policy</h2>
-                <p>We may update this Privacy Policy from time to time. When we make significant changes, we'll notify you through the app or by other means. We encourage you to review this policy periodically.</p>
+                <p>We may update this Privacy Policy from time to time. When we make significant changes, we'll notify you through the app. We encourage you to review this policy periodically.</p>
 
                 <h2>Contact Us</h2>
                 <p>If you have any questions about this Privacy Policy or our privacy practices, please contact us at:</p>
-                <p><strong>Email:</strong> privacy@spliteven.app</p>
+                <p><strong>Email:</strong> bitbox.apps.contact@gmail.com</p>
                 <p>We take your privacy seriously and will respond to your inquiries promptly.</p>
             </div>
         </section>
@@ -2135,13 +1993,6 @@
                 }
             });
         });
-
-        // Form Submit Handler
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            alert('Thank you for your message! We\'ll get back to you soon.');
-            event.target.reset();
-        }
 
         // Handle URL hash on page load
         window.addEventListener('load', () => {
