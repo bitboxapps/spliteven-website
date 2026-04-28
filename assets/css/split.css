@@ -1,0 +1,744 @@
+/* ═══════════════════════════════════════════════════════════════
+   SplitEven — Split Summary Page
+   Colours and layout match the Android Summary screen exactly.
+   Added: 2026-04-26
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Variables ──────────────────────────────────────────────── */
+:root {
+    --primary:              #6366F1;
+    --primary-dark:         #4F46E5;
+    --primary-light:        #818CF8;
+    --primary-container:    #E0E7FF;
+    --on-primary-container: #3730A3;
+    --surface:              #FFFFFF;
+    --background:           #F8F9FB;
+    --on-surface:           #1F2937;
+    --on-surface-variant:   #6B7280;
+    --outline:              #E5E7EB;
+    --success:              #16A34A;
+    --success-bg:           #F0FDF4;
+    --error:                #DC2626;
+    --gradient-start:       #6366F1;
+    --gradient-end:         #4F46E5;
+}
+
+/* ── Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--background);
+    color: var(--on-surface);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ── Navbar ─────────────────────────────────────────────────── */
+.navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--outline);
+}
+.nav-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0.875rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary);
+    text-decoration: none;
+}
+.logo-img { width: 32px; height: 32px; object-fit: contain; display: block; }
+.nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: white;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.nav-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(99,102,241,0.35);
+}
+
+/* ── Page wrapper ───────────────────────────────────────────── */
+.split-page {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 5rem 1.25rem 6rem;
+}
+
+/* ── Cards (shared base) ────────────────────────────────────── */
+.card {
+    background: var(--surface);
+    border-radius: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+    overflow: hidden;
+}
+
+/* ── Merchant card ──────────────────────────────────────────── */
+.merchant-card {
+    padding: 20px 20px 16px;
+    text-align: center;
+    margin-bottom: 12px;
+}
+.merchant-name {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+.merchant-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.85rem;
+    color: var(--on-surface-variant);
+}
+.merchant-date svg { opacity: 1; }
+.merchant-address {
+    margin-top: 4px;
+    font-size: 0.78rem;
+    color: var(--on-surface-variant);
+}
+
+/* ── Total card (gradient) ──────────────────────────────────── */
+.total-card {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    border-radius: 20px;
+    padding: 28px 24px 24px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(99,102,241,0.30);
+    text-align: center;
+}
+.total-card::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 140px; height: 140px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 50%;
+}
+.total-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(99,102,241,0.38); }
+.total-card:active { transform: translateY(0); }
+.total-label {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+.total-amount {
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: white;
+    font-variant-numeric: tabular-nums;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.1;
+    margin-bottom: 8px;
+}
+.total-subtitle {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+}
+
+/* ── Section header ─────────────────────────────────────────── */
+.section-header {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin-bottom: 12px;
+}
+.section-sub {
+    font-size: 0.8rem;
+    color: var(--on-surface-variant);
+    margin-bottom: 12px;
+    margin-top: -10px;
+}
+
+/* ── Chart card ─────────────────────────────────────────────── */
+.chart-card {
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+.donut-wrapper {
+    position: relative;
+    flex-shrink: 0;
+    width: 130px;
+    height: 130px;
+}
+.donut-ring {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    position: relative;
+}
+.donut-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64%;
+    height: 64%;
+    background: var(--surface);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+}
+.donut-total {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    font-variant-numeric: tabular-nums;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1;
+}
+.donut-count {
+    font-size: 0.65rem;
+    color: var(--on-surface-variant);
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    line-height: 1;
+}
+.chart-legend {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.legend-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--on-surface);
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.legend-pct {
+    font-size: 0.8rem;
+    color: var(--on-surface-variant);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── Breakdown rows ─────────────────────────────────────────── */
+.breakdown-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+.breakdown-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.breakdown-row:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+.breakdown-row:active { transform: translateY(0); }
+.avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+}
+.row-info { flex: 1; min-width: 0; }
+.row-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--on-surface);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.row-items {
+    font-size: 0.78rem;
+    color: var(--on-surface-variant);
+}
+.row-right { text-align: right; flex-shrink: 0; }
+.row-amount {
+    font-size: 1rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    font-family: 'Courier New', Courier, monospace;
+}
+.row-pct {
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+}
+.row-chevron {
+    color: var(--on-surface-variant);
+    margin-left: 4px;
+    flex-shrink: 0;
+}
+
+/* ── Receipt image card ─────────────────────────────────────── */
+.receipt-card {
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+}
+.receipt-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.10); }
+.receipt-card-header {
+    padding: 14px 16px 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--outline);
+}
+.receipt-card-header span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--on-surface-variant);
+}
+.receipt-thumb {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+/* ── Download footer ────────────────────────────────────────── */
+.download-footer {
+    text-align: center;
+    padding: 24px 16px;
+    border-top: 1px solid var(--outline);
+    margin-top: 8px;
+}
+.download-footer p {
+    font-size: 0.85rem;
+    color: var(--on-surface-variant);
+    margin-bottom: 14px;
+}
+.store-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: var(--on-surface);
+    color: white;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.88rem;
+    transition: transform 0.2s, background 0.2s;
+}
+.store-btn:hover { background: #374151; transform: translateY(-1px); }
+
+/* ── Loading skeletons ──────────────────────────────────────── */
+.skeleton-block {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+    border-radius: 8px;
+}
+@keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+.skeleton-card {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.sk-line { height: 14px; border-radius: 6px; }
+.sk-line.wide { width: 70%; }
+.sk-line.narrow { width: 40%; }
+.sk-line.full { width: 100%; }
+.sk-title { height: 20px; border-radius: 8px; width: 55%; margin: 0 auto 10px; }
+.sk-gradient { height: 110px; border-radius: 20px; margin-bottom: 12px; background: linear-gradient(90deg, #c7d2fe 25%, #a5b4fc 50%, #c7d2fe 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+
+/* ── Error state ────────────────────────────────────────────── */
+.error-state {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    display: none;
+}
+.error-icon {
+    width: 72px; height: 72px;
+    background: #FEF2F2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 2rem;
+}
+.error-state h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin-bottom: 8px;
+}
+.error-state p {
+    font-size: 0.9rem;
+    color: var(--on-surface-variant);
+    line-height: 1.6;
+}
+
+/* ── Modal overlay ──────────────────────────────────────────── */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 2000;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+}
+.modal-overlay.active { display: flex; }
+
+/* ── Bottom sheet (modal) ───────────────────────────────────── */
+.bottom-sheet {
+    background: var(--surface);
+    border-radius: 24px 24px 0 0;
+    width: 100%;
+    max-width: 600px;
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    animation: slide-up 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+    overflow: hidden;
+}
+@keyframes slide-up {
+    from { transform: translateY(100%); opacity: 0.6; }
+    to   { transform: translateY(0);   opacity: 1; }
+}
+.sheet-handle {
+    width: 36px; height: 4px;
+    background: var(--outline);
+    border-radius: 2px;
+    margin: 12px auto 0;
+    flex-shrink: 0;
+}
+.sheet-header {
+    padding: 16px 20px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--outline);
+    flex-shrink: 0;
+}
+.sheet-avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+}
+.sheet-title {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+.sheet-total {
+    font-size: 1rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+.sheet-close {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--background);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--on-surface-variant);
+    transition: background 0.15s;
+    flex-shrink: 0;
+}
+.sheet-close:hover { background: var(--outline); }
+.sheet-body {
+    overflow-y: auto;
+    padding: 16px 20px 28px;
+    flex: 1;
+}
+
+/* ── Sheet item list ────────────────────────────────────────── */
+.sheet-section-label {
+    font-size: 0.93rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin-bottom: 10px;
+}
+
+/* ── Per-person sheet header (avatar + name/amount column + X) ── */
+.person-header-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+}
+.person-header-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+.person-header-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.person-header-amount {
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── Stacked sheet header (used by total modal only) ─────────── */
+.sheet-header--stacked {
+    flex-wrap: wrap;
+    position: relative;
+    align-items: flex-start;
+    gap: 1px; /* tight gap so title and amount sit close together */
+}
+.sheet-header--stacked .sheet-avatar {
+    display: none !important;
+}
+.sheet-header--stacked .sheet-title {
+    width: calc(100% - 48px);
+    flex: none;
+    font-size: 1.05rem;
+}
+.sheet-header--stacked .sheet-total {
+    width: calc(100% - 48px);
+    flex: none;
+    margin-top: 2px;
+    font-size: 1.35rem;
+}
+.sheet-header--stacked .sheet-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+}
+.item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+.item-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+.item-row-name {
+    font-size: 0.88rem;
+    color: var(--on-surface);
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.item-row-qty {
+    font-size: 0.78rem;
+    color: var(--on-surface-variant);
+    margin-left: 4px;
+}
+.item-row-price {
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: var(--on-surface);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+}
+
+/* ── Bill breakdown card (inside sheet) ─────────────────────── */
+.breakdown-card {
+    background: var(--background);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-top: 4px;
+}
+.breakdown-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    font-size: 0.88rem;
+}
+.breakdown-line .label { color: var(--on-surface); font-weight: 700; }
+.breakdown-line .value {
+    font-weight: 500;
+    color: var(--on-surface);
+    font-variant-numeric: tabular-nums;
+}
+.breakdown-line.discount .label { color: var(--success); font-weight: 700; }
+.breakdown-line.discount .value { color: var(--success); font-weight: 700; }
+
+/* ── Breakdown sub-lines (Tax / Tip / Service Charge) ────── */
+.breakdown-sub-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 0 3px 16px; /* indented under Tax & Charges */
+    font-size: 0.82rem;
+}
+.breakdown-sub-line .sub-label {
+    color: var(--on-surface-variant);
+    font-weight: 400;
+}
+.breakdown-sub-line .sub-value {
+    color: var(--on-surface-variant);
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+}
+.breakdown-divider {
+    border: none;
+    border-top: 1px solid var(--outline);
+    margin: 8px 0;
+}
+.breakdown-line.total-line .label {
+    font-weight: 700;
+    color: var(--on-surface);
+    font-size: 0.95rem;
+}
+.breakdown-line.total-line .value {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 0.95rem;
+}
+
+/* ── Receipt fullscreen overlay ─────────────────────────────── */
+.receipt-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 3000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+.receipt-overlay.active { display: flex; }
+.receipt-overlay img {
+    max-width: 100%;
+    max-height: 92vh;
+    border-radius: 8px;
+    object-fit: contain;
+}
+.receipt-overlay-close {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    width: 40px; height: 40px;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    color: white;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+}
+.receipt-overlay-close:hover { background: rgba(255,255,255,0.25); }
+
+/* ── Download footer store buttons ──────────────────────────── */
+.store-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.store-btn--apple {
+    background: #1C1C1E;
+}
+.store-btn--apple:hover { background: #3A3A3C; }
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (min-width: 600px) {
+    .modal-overlay { align-items: center; }
+    .bottom-sheet {
+        border-radius: 24px;
+        max-height: 80vh;
+        margin: 1rem;
+    }
+    .sheet-handle { display: none; }
+}
+
+/* Chart card stays in row layout on all screen sizes.
+   Shrink donut a bit on very small screens to keep legend visible. */
+@media (max-width: 400px) {
+    .donut-wrapper, .donut-ring {
+        width: 110px;
+        height: 110px;
+    }
+    .chart-card { gap: 16px; }
+    .total-amount { font-size: 2.25rem; }
+}

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split Summary | SplitEven</title>
+    <meta name="description" content="View your shared bill split summary powered by SplitEven.">
+    <!-- Prevent search engines from indexing individual split pages -->
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://getspliteven.com/">
+
+    <!-- Open Graph — fallback for link previews -->
+    <meta property="og:type"        content="website">
+    <meta property="og:title"       content="Split Summary | SplitEven">
+    <meta property="og:description" content="View a shared bill split powered by SplitEven — AI bill splitter for Android.">
+    <meta property="og:image"       content="https://getspliteven.com/assets/images/featured_image.png">
+    <meta property="og:site_name"   content="SplitEven">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Split page styles -->
+    <link rel="stylesheet" href="assets/css/split.css">
+</head>
+<body>
+
+    <!-- ── Navbar ──────────────────────────────────────────── -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/spliteven_logo.png" alt="SplitEven" class="logo-img">
+                SplitEven
+            </a>
+            <a href="https://getspliteven.com"
+               class="nav-cta" target="_blank" rel="noopener">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3.18 23.31L13.41 13 3.18.69C2.45 1.05 2 1.82 2 2.69v18.62c0 .87.45 1.64 1.18 2zM16.54 9.65L5.92.73l10.62 9.97-1 .95zm1.64 7.53L7.56 23.27l10.62-9.97 1 .95zm3.42-5.07c.24.44.38.94.38 1.48s-.14 1.04-.38 1.48l-2.04 1.18L18.3 12l1.26-3.25 2.04 1.36z"/>
+                </svg>
+                Get the App
+            </a>
+        </div>
+    </nav>
+
+    <!-- ── Page ────────────────────────────────────────────── -->
+    <main class="split-page">
+
+        <!-- Loading state -->
+        <div id="loadingState">
+            <div class="skeleton-card">
+                <div class="skeleton-block sk-title" style="margin-bottom:8px"></div>
+                <div class="skeleton-block sk-line narrow" style="margin:0 auto"></div>
+            </div>
+            <div class="skeleton-block sk-gradient"></div>
+            <div class="skeleton-card">
+                <div class="skeleton-block sk-line wide" style="margin-bottom:12px"></div>
+                <div class="skeleton-block sk-line narrow"></div>
+            </div>
+            <div class="skeleton-card" style="margin-bottom:8px">
+                <div class="skeleton-block sk-line full" style="margin-bottom:8px"></div>
+                <div class="skeleton-block sk-line wide"></div>
+            </div>
+            <div class="skeleton-card" style="margin-bottom:8px">
+                <div class="skeleton-block sk-line full" style="margin-bottom:8px"></div>
+                <div class="skeleton-block sk-line narrow"></div>
+            </div>
+        </div>
+
+        <!-- Error state -->
+        <div id="errorState" class="error-state" role="alert">
+            <div class="error-icon">🔗</div>
+            <h2 id="errorTitle">Split summary not found</h2>
+            <p id="errorMsg">This link may be invalid or the split may have been removed.</p>
+            <p style="margin-top:1.5rem;font-size:0.82rem;color:var(--on-surface-variant)">
+                Split your next bill with
+                <a href="index.html" style="color:var(--primary);font-weight:600;text-decoration:none">SplitEven</a>
+            </p>
+        </div>
+
+        <!-- Summary content (populated by split.js) -->
+        <div id="summaryContent" style="display:none">
+
+            <!-- Merchant card -->
+            <div class="card merchant-card" style="margin-bottom:12px">
+                <div class="merchant-name" id="merchantName"></div>
+                <div class="merchant-date">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6366F1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    <span id="merchantDate"></span>
+                </div>
+                <div class="merchant-address" id="merchantAddress" style="display:none"></div>
+            </div>
+
+            <!-- Total card -->
+            <div class="total-card" onclick="openTotalBreakdown()" role="button"
+                 aria-label="View total bill breakdown" tabindex="0"
+                 onkeydown="if(event.key==='Enter')openTotalBreakdown()">
+                <div class="total-label">
+                    Total Amount
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:4px">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                </div>
+                <div class="total-amount" id="totalAmount">$0.00</div>
+                <div class="total-subtitle">Including tax, tip &amp; charges</div>
+            </div>
+
+            <!-- Visual Breakdown header + chart -->
+            <div id="chartSection" style="display:none">
+                <p class="section-header">Visual Breakdown</p>
+                <div class="card chart-card">
+                    <div class="donut-wrapper">
+                        <div class="donut-ring" id="donutRing"></div>
+                        <div class="donut-center">
+                            <span class="donut-total" id="donutTotal"></span>
+                            <span class="donut-count" id="donutCount">
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="chart-legend" id="chartLegend"></div>
+                </div>
+            </div>
+
+            <!-- Breakdown details -->
+            <div id="breakdownSection" style="display:none">
+                <p class="section-header">Breakdown Details</p>
+                <p class="section-sub">Tap a card below to see the individual breakdown</p>
+                <div class="breakdown-rows" id="breakdownRows"></div>
+            </div>
+
+            <!-- Receipt image -->
+            <div id="receiptSection" style="display:none">
+                <p class="section-header">Original Receipt</p>
+                <div class="card receipt-card" onclick="openReceiptImage()" role="button"
+                     aria-label="View original receipt" tabindex="0"
+                     onkeydown="if(event.key==='Enter')openReceiptImage()">
+                    <div class="receipt-card-header">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                        <span>Tap to view receipt</span>
+                    </div>
+                    <img id="receiptThumb" class="receipt-thumb" alt="Receipt" loading="lazy">
+                </div>
+            </div>
+
+            <!-- Download footer -->
+            <div class="download-footer">
+                <p>Split your next bill with SplitEven</p>
+                <div class="store-btns">
+                    <a href="https://play.google.com/store/apps/details?id=com.bitbox.spliteven"
+                       class="store-btn" target="_blank" rel="noopener">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3.18 23.31L13.41 13 3.18.69C2.45 1.05 2 1.82 2 2.69v18.62c0 .87.45 1.64 1.18 2zM16.54 9.65L5.92.73l10.62 9.97-1 .95zm1.64 7.53L7.56 23.27l10.62-9.97 1 .95zm3.42-5.07c.24.44.38.94.38 1.48s-.14 1.04-.38 1.48l-2.04 1.18L18.3 12l1.26-3.25 2.04 1.36z"/>
+                        </svg>
+                        Download on Google Play
+                    </a>
+                    <a href="https://apps.apple.com/us/app/spliteven-ai-bill-splitter/id6762062290"
+                       class="store-btn store-btn--apple" target="_blank" rel="noopener">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                        </svg>
+                        Download on the App Store
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <!-- /summaryContent -->
+
+    </main>
+
+    <!-- ══ Total breakdown modal ═══════════════════════════════ -->
+    <div id="totalModal" class="modal-overlay" onclick="if(event.target===this)closeModal('totalModal')" role="dialog" aria-modal="true" aria-labelledby="totalSheetTitle">
+        <div class="bottom-sheet">
+            <div class="sheet-handle"></div>
+            <div class="sheet-header">
+                <div id="totalSheetAvatar" class="sheet-avatar" style="display:none; background:var(--primary)"></div>
+                <div class="sheet-title" id="totalSheetTitle">Total Bill</div>
+                <span class="sheet-total" id="totalSheetAmount"></span>
+                <button class="sheet-close" onclick="closeModal('totalModal')" aria-label="Close">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div class="sheet-body" id="totalSheetBody"></div>
+        </div>
+    </div>
+
+    <!-- ══ Per-person breakdown modal ═════════════════════════ -->
+    <div id="personModal" class="modal-overlay" onclick="if(event.target===this)closeModal('personModal')" role="dialog" aria-modal="true" aria-labelledby="personSheetTitle">
+        <div class="bottom-sheet">
+            <div class="sheet-handle"></div>
+            <div class="sheet-header">
+                <div id="personSheetAvatar" class="sheet-avatar" style="background:var(--primary)"></div>
+                <div class="sheet-title" id="personSheetTitle"></div>
+                <span class="sheet-total" id="personSheetAmount"></span>
+                <button class="sheet-close" onclick="closeModal('personModal')" aria-label="Close">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div class="sheet-body" id="personSheetBody"></div>
+        </div>
+    </div>
+
+    <!-- ══ Receipt fullscreen overlay ═════════════════════════ -->
+    <div id="receiptImageOverlay" class="receipt-overlay" onclick="if(event.target===this)closeModal('receiptImageOverlay')" role="dialog" aria-modal="true" aria-label="Receipt image">
+        <button class="receipt-overlay-close" onclick="closeModal('receiptImageOverlay')" aria-label="Close">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <img id="receiptFullImg" alt="Original receipt" style="max-width:100%;max-height:92vh;border-radius:8px;object-fit:contain;">
+    </div>
+
+    <!-- ── Firebase SDK (compat, same version as rest of site) ── -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-check-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+    <!-- ── Split page logic ──────────────────────────────────── -->
+    <script src="assets/js/split.js"></script>
+
+</body>
+</html>
