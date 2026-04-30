@@ -354,10 +354,9 @@ body {
     padding: 1.5rem 2rem;
     margin: 2.5rem 0;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
 }
 .article-cta p {
     color: var(--primary-dark) !important;
@@ -371,6 +370,31 @@ body {
     font-weight: 400;
     display: block;
     margin-top: 0.2rem;
+}
+
+/* Dual store links — used in article-cta and post-nav */
+.cta-store-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+}
+.cta-store-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.cta-store-link:hover { color: var(--primary-dark); text-decoration: underline; }
+.cta-store-sep {
+    color: var(--outline);
+    font-size: 1rem;
+    line-height: 1;
 }
 
 /* Post footer nav */
@@ -517,7 +541,7 @@ body {
     .blog-grid { grid-template-columns: 1fr; }
     .page-hero h1 { font-size: 2rem; }
     .post-hero h1 { font-size: 1.75rem; }
-    .article-cta { flex-direction: column; }
+
     .footer-container { grid-template-columns: 1fr; text-align: center; }
     .footer-brand p { max-width: none; }
     .post-meta-bar { gap: 0.75rem; }
