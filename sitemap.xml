@@ -59,7 +59,7 @@
   <!-- Blog Post 1 -->
   <url>
     <loc>https://getspliteven.com/blog/how-to-split-restaurant-bill-fairly.html</loc>
-    <lastmod>2026-03-26</lastmod>
+    <lastmod>2026-05-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -75,7 +75,7 @@
   <!-- Blog Post 3 -->
   <url>
     <loc>https://getspliteven.com/blog/best-bill-splitting-apps-android-2026.html</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-05-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -92,6 +92,46 @@
   <url>
     <loc>https://getspliteven.com/blog/how-to-split-bills-with-friends.html</loc>
     <lastmod>2026-04-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Post 6 -->
+  <url>
+    <loc>https://getspliteven.com/blog/best-bill-splitting-apps-iphone-ios-2026.html</loc>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Post 7 -->
+  <url>
+    <loc>https://getspliteven.com/blog/splitwise-vs-spliteven-2026.html</loc>
+    <lastmod>2026-05-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Post 8 -->
+  <url>
+    <loc>https://getspliteven.com/blog/how-to-split-bills-in-multiple-currencies.html</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Post 9 -->
+  <url>
+    <loc>https://getspliteven.com/blog/how-to-split-bill-on-whatsapp.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Post 10 -->
+  <url>
+    <loc>https://getspliteven.com/blog/how-to-calculate-tip-and-tax-when-splitting-bill.html</loc>
+    <lastmod>2026-06-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
