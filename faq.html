@@ -195,10 +195,25 @@
         .footer-links a:hover { color: white; }
         .footer-bottom { max-width: 1200px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: rgba(255,255,255,0.5); font-size: 0.875rem; }
 
+        .contact-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
         @media (max-width: 768px) {
             .navbar { display: none; }
             .footer { display: none; }
             .faq-content { padding-top: 1.5rem; }
+            .contact-btns {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .contact-btns a {
+                text-align: center;
+            }
         }
 
         h1 {
@@ -590,7 +605,7 @@
     <div class="contact-section">
         <h2>Still have questions?</h2>
         <p>We're here to help! If you couldn't find your answer in the FAQ, reach out to our team.</p>
-        <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
+        <div class="contact-btns">
             <a href="support.html"
                 style="background: white; color: var(--primary); padding: 0.75rem 1.5rem; border-radius: 10px; font-weight: 600; text-decoration: none;">
                 Contact Support Form
