@@ -516,6 +516,30 @@ body {
     transition: all 0.3s ease;
 }
 .modal-submit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(99,102,241,0.3); }
+/* Quick Answer Box */
+.quick-answer {
+    background: #f0f4ff;
+    border-left: 4px solid var(--primary, #6366f1);
+    border-radius: 0 12px 12px 0;
+    padding: 1rem 1.25rem;
+    margin: 0 0 1.75rem;
+}
+.quick-answer strong {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary, #6366f1);
+    margin-bottom: 0.4rem;
+}
+.quick-answer p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--on-surface);
+    line-height: 1.6;
+}
+
 .modal-submit:disabled { opacity: 0.7; cursor: not-allowed; }
 .modal-privacy { font-size: 0.78rem; color: var(--on-surface-variant); text-align: center; }
 .modal-success { display: none; text-align: center; padding: 0.5rem 0; }

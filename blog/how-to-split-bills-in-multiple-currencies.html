@@ -47,7 +47,47 @@
       ]
     }
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+            <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do you split a bill that's in a foreign currency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Log the expense in the local currency it was paid in — don't convert immediately. At the end of the trip, settle all debts in one agreed currency (usually everyone's home currency or a stable base like USD or EUR) using the exchange rate at time of settlement."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the best app for splitting expenses in multiple currencies?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SplitEven handles receipts in any currency — scan the receipt and it reads the local currency and amounts automatically. For tracking a running balance of all trip expenses across multiple currencies, Tricount also has strong multi-currency support."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you handle exchange rate differences when splitting group travel costs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Agree at the start of the trip to use the exchange rate at the time of payment rather than recalculating when you settle up. Settling in a single currency at the end of the trip is cleaner than making multiple small conversions throughout."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should you split travel expenses as you go or at the end of the trip?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Settling at the end is cleaner — it reduces the total number of transactions and means you only deal with currency conversion once. Log expenses in the local currency as you go, then do a single settlement in your home currency when you're back."
+          }
+        }
+      ]
+    }
+    </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/blog.css">
@@ -73,9 +113,10 @@
         .scenario-card p { font-size: 0.9rem; color: var(--on-surface-variant); margin: 0; }
     </style>
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
+    <meta name="apple-mobile-web-app-title" content="SplitEven">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png">
     <link rel="manifest" href="../site.webmanifest">
 </head>
 <body>
@@ -119,6 +160,11 @@
     <!-- Article -->
     <div class="article-wrap">
         <article class="article-body">
+            <div class="quick-answer">
+                <strong>Quick Answer</strong>
+                <p>The simplest way to split bills in multiple currencies while travelling is to log each expense in the local currency it was paid in, then settle all debts at the end of the trip in one agreed currency. This avoids repeated small conversions and keeps the record clean. SplitEven reads receipts in any currency automatically.</p>
+            </div>
+
 
             <p>Group travel is one of the few situations where money conversations become genuinely complicated. You're paying in a foreign currency, restaurant bills include unfamiliar taxes, some people pay by card while others use cash, and at the end of a ten-day trip nobody can remember who paid for what on day three.</p>
 
@@ -211,6 +257,21 @@
             <p>Multi-currency group expenses are only complicated if you try to do the maths manually. Scan restaurant bills as they arrive, track bigger shared expenses in a trip app like Tricount, and agree on a base currency for the final settlement. The money side of the trip takes care of itself — and you can focus on actually enjoying it.</p>
 
             <p>Planning a group holiday? See our guide on <a href="how-to-track-group-trip-expenses.html">how to track group trip expenses without the drama</a> for a full system that works before, during, and after the trip.</p>
+
+
+            <h2>Frequently Asked Questions</h2>
+
+            <p><strong>How do you split a bill that's in a foreign currency?</strong><br>
+            Log the expense in the local currency it was paid in — don't convert immediately. At the end of the trip, settle all debts in one agreed currency (usually everyone's home currency or a stable base like USD or EUR) using the exchange rate at time of settlement.</p>
+
+            <p><strong>What is the best app for splitting expenses in multiple currencies?</strong><br>
+            SplitEven handles receipts in any currency — scan the receipt and it reads the local currency and amounts automatically. For tracking a running balance of all trip expenses across multiple currencies, Tricount also has strong multi-currency support.</p>
+
+            <p><strong>How do you handle exchange rate differences when splitting group travel costs?</strong><br>
+            Agree at the start of the trip to use the exchange rate at the time of payment rather than recalculating when you settle up. Settling in a single currency at the end of the trip is cleaner than making multiple small conversions throughout.</p>
+
+            <p><strong>Should you split travel expenses as you go or at the end of the trip?</strong><br>
+            Settling at the end is cleaner — it reduces the total number of transactions and means you only deal with currency conversion once. Log expenses in the local currency as you go, then do a single settlement in your home currency when you're back.</p>
 
         </article>
 
