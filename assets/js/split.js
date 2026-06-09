@@ -205,11 +205,24 @@
     }
 
     /* ── Items list HTML ────────────────────────────────────── */
-    function buildItemListHtml(items, currency, showQty) {
+    /*
+     * showQty:
+     *   - Total breakdown: uses item.quantity (the original receipt line quantity)
+     *   - Per-person breakdown: uses item.assignedQuantity (the qty assigned to that
+     *     specific friend via "Split by Quantity"). Only shown when non-null and > 1.
+     */
+    function buildItemListHtml(items, currency, showQty, useAssignedQty) {
         if (!items || items.length === 0) return '';
         var rows = items.map(function (item) {
-            var qtyHtml = (showQty && item.quantity && item.quantity !== 1)
-                ? '<span class="item-row-qty">×' + Number(item.quantity).toFixed(item.quantity % 1 === 0 ? 0 : 1) + '</span>'
+            var qtyValue = useAssignedQty ? item.assignedQuantity : item.quantity;
+            // Total breakdown (useAssignedQty=false): only annotate when qty > 1,
+            // matching the existing receipt-items behaviour.
+            // Per-person breakdown (useAssignedQty=true): always annotate when
+            // assignedQuantity is present — even ×1 — so the user can see their
+            // exact allocation and the display is consistent with the mobile app.
+            var shouldShowQty = showQty && qtyValue != null && (useAssignedQty || qtyValue !== 1);
+            var qtyHtml = shouldShowQty
+                ? '<span class="item-row-qty">×' + Math.round(qtyValue) + '</span>'
                 : '';
             return '<div class="item-row">' +
                 '<span class="item-row-name">' + escapeHtml(item.name) + qtyHtml + '</span>' +
@@ -230,7 +243,7 @@
         /* Items list */
         if (_data.receiptItems && _data.receiptItems.length > 0) {
             body += '<p class="sheet-section-label">Item Summary (' + _data.receiptItems.length + ')</p>';
-            body += buildItemListHtml(_data.receiptItems, currency, true);
+            body += buildItemListHtml(_data.receiptItems, currency, true, false);
         }
 
         /* Bill breakdown */
@@ -264,7 +277,7 @@
         var itemCount = (split.items || []).length;
         if (itemCount > 0) {
             body += '<p class="sheet-section-label">Item Summary (' + itemCount + ')</p>';
-            body += buildItemListHtml(split.items, currency, false);
+            body += buildItemListHtml(split.items, currency, true, true);
         }
 
         /* Charges breakdown */
