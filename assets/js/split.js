@@ -89,12 +89,6 @@
         return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     }
 
-    function isExpired(timestamp) {
-        if (!timestamp) return false;
-        var expMs = timestamp.seconds ? timestamp.seconds * 1000 : new Date(timestamp).getTime();
-        return Date.now() > expMs;
-    }
-
     function escapeHtml(str) {
         var d = document.createElement('div');
         d.textContent = str || '';
@@ -179,10 +173,12 @@
         var taxAndCharges = tax + tip + serviceCharge;
         html += breakdownLineHtml('Tax & Charges', '+ ' + formatCurrency(taxAndCharges, currency), false);
 
-        /* Sub-items — always shown even when $0.00, indented */
-        html += breakdownSubLineHtml('Tax',            formatCurrency(tax,           currency));
-        html += breakdownSubLineHtml('Tip',            formatCurrency(tip,           currency));
-        html += breakdownSubLineHtml('Service Charge', formatCurrency(serviceCharge, currency));
+        /* Sub-items — only shown when at least one component is non-zero */
+        if (taxAndCharges > 0) {
+            html += breakdownSubLineHtml('Tax',            formatCurrency(tax,           currency));
+            html += breakdownSubLineHtml('Tip',            formatCurrency(tip,           currency));
+            html += breakdownSubLineHtml('Service Charge', formatCurrency(serviceCharge, currency));
+        }
 
         /* Discount — only when > 0, shown in green with − prefix */
         if (discount > 0) {
@@ -348,17 +344,13 @@
         document.getElementById('summaryContent').style.display = 'none';
     }
 
-    function showError(expired) {
+    function showError() {
         document.getElementById('loadingState').style.display = 'none';
         document.getElementById('summaryContent').style.display = 'none';
         var el = document.getElementById('errorState');
         el.style.display = 'block';
-        document.getElementById('errorTitle').textContent = expired
-            ? 'This link has expired'
-            : 'Split summary not found';
-        document.getElementById('errorMsg').textContent = expired
-            ? 'Share links are valid for 30 days. Ask the person who shared this to generate a new link from the SplitEven app.'
-            : 'This link may be invalid or the split may have been removed.';
+        document.getElementById('errorTitle').textContent = 'Split summary not found';
+        document.getElementById('errorMsg').textContent = 'This link may have expired or been removed. Ask the person who shared it to generate a new link from the SplitEven app.';
     }
 
     function showSummary(data) {
@@ -371,7 +363,10 @@
 
         /* Merchant card */
         document.getElementById('merchantName').textContent = data.merchantName || 'Unknown';
-        document.getElementById('merchantDate').textContent = formatDate(data.date);
+        var dateText = formatDate(data.date);
+        var merchantDateEl = document.getElementById('merchantDate');
+        merchantDateEl.textContent = dateText;
+        merchantDateEl.parentElement.style.display = dateText ? '' : 'none';
         var addrEl = document.getElementById('merchantAddress');
         if (data.merchantAddress) {
             addrEl.textContent = data.merchantAddress;
@@ -425,32 +420,27 @@
     /* ── Main fetch ─────────────────────────────────────────── */
     function fetchSplit(shareToken) {
         if (!db) {
-            showError(false);
+            showError();
             return;
         }
         db.collection('shared_receipts').doc(shareToken).get()
             .then(function (doc) {
                 if (!doc.exists) {
-                    showError(false);
+                    showError();
                     return;
                 }
-                var data = doc.data();
-                if (isExpired(data.expiresAt)) {
-                    showError(true);
-                    return;
-                }
-                showSummary(data);
+                showSummary(doc.data());
             })
             .catch(function (err) {
                 console.error('Error fetching split:', err);
-                showError(false);
+                showError();
             });
     }
 
     /* ── Initialise ─────────────────────────────────────────── */
     var shareToken = getQueryParam('id');
     if (!shareToken || shareToken.trim() === '') {
-        showError(false);
+        showError();
     } else {
         showLoading();
         fetchSplit(shareToken.trim());

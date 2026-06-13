@@ -620,7 +620,7 @@ body {
 
 /* ── Bill breakdown card (inside sheet) ─────────────────────── */
 .breakdown-card {
-    background: var(--background);
+    background: rgba(224, 231, 255, 0.5); /* PrimaryContainer #E0E7FF at 50% — matches Android card */
     border-radius: 12px;
     padding: 14px 16px;
     margin-top: 4px;
