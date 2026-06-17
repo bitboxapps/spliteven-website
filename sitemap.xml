@@ -56,6 +56,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Blog Post 16 — Published 2026-06-17 -->
+  <url>
+    <loc>https://getspliteven.com/blog/how-to-split-bill-when-everyone-orders-different.html</loc>
+    <lastmod>2026-06-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Blog Post 1 -->
   <url>
     <loc>https://getspliteven.com/blog/how-to-split-restaurant-bill-fairly.html</loc>
@@ -135,5 +143,4 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
 </urlset>
