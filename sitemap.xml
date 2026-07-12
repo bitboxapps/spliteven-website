@@ -143,4 +143,20 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- Blog Post 11 -->
+  <url>
+    <loc>https://getspliteven.com/blog/how-to-split-bills-as-a-couple.html</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Post 12 -->
+  <url>
+    <loc>https://getspliteven.com/blog/how-to-split-rent-fairly-with-roommates.html</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
