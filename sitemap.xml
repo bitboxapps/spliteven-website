@@ -175,4 +175,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+   <!-- Blog Post 15 -->
+  <url>
+    <loc>https://getspliteven.com/blog/splitwise-vs-tricount-vs-spliteven-2026.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
