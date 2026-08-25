@@ -183,4 +183,30 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- Blog Post 17 — Published 2026-08-06 -->
+  <url>
+    <loc>https://getspliteven.com/blog/how-to-split-bill-when-someone-doesnt-drink.html</loc>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Post 18 — Published 2026-08-13 -->
+  <url>
+    <loc>https://getspliteven.com/blog/how-to-remind-friends-to-pay-you-back.html</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Post 19 — Published 2026-08-20 -->
+  <url>
+    <loc>https://getspliteven.com/blog/how-to-split-airbnb-cost-fairly.html</loc>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+
 </urlset>
