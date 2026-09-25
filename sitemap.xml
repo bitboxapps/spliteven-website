@@ -208,5 +208,31 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- FUTURE — Uncomment on 2026-08-27
+  <url>
+    <loc>https://getspliteven.com/blog/how-to-split-bachelorette-party-bill.html</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  END FUTURE -->
+
+  <!-- FUTURE — Uncomment on 2026-09-03
+  <url>
+    <loc>https://getspliteven.com/blog/how-to-split-bill-large-group.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  END FUTURE -->
+
+  <!-- FUTURE — Uncomment on 2026-09-10
+  <url>
+    <loc>https://getspliteven.com/blog/how-to-scan-receipt-and-split-bill.html</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  END FUTURE -->
 
 </urlset>
